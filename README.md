@@ -1,8 +1,7 @@
 # model_seg_rat_axon-myelin_bf
 ---
 ## Model overview
-(image of segmentation obtained from this model)
-
+![bf model preview img](bf_model_preview.png)
 Default Bright-Field (BF) optical microscopy model that works at a resolution of 0.1 micrometer per pixel.
 
 ## Dependencies
