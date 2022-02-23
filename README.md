@@ -1,9 +1,56 @@
 # model_seg_rat_axon-myelin_bf
+---
+## Model overview
+(image of segmentation obtained from this model)
+
 Default Bright-Field (BF) optical microscopy model that works at a resolution of 0.1 micrometer per pixel.
 
-# Steps to train this model
-1. Get `ivadomed` version: [[83f11d4]](https://github.com/ivadomed/ivadomed/pull/980/commits/83f11d4433f8a8679d11bb7667a4e1d9e02c56b1)
-2. Get the data: `data_axondeepseg_bf_training` (duke/projects/axondeepseg/20211105_bf_datasets/data_axondeepseg_bf_training)
-3. Copy the "model_seg_rat_axon-myelin_bf_training.json" and "split_dataset.joblib" files, and update the following fields: `fname_split`, `path_output`, `path_data` and `gpu_ids`.
-4. Run ivadomed: `ivadomed -c path/to/the/config/file`
-5. The trained model file will be saved under the `path_output` directory.
+## Dependencies
+- [ivadomed](https://ivadomed.org/) commit: e6554281d07b5afef9e68ce8b02e86b02bd68363
+- [axondeepseg](https://axondeepseg.readthedocs.io/en/latest/) commit: 805868e39eddf620c9f3d60d313cadffb1121bfb
+
+## Segment (ADS)
+To segment an image using this model, use
+```
+axondeepseg -t BF -i <IMG_PATH> -m <path_to_model_folder> -s <PIXEL_SIZE>
+```
+The `-m` option can be omitted in this case because this is a default built-in model.
+
+
+
+## Train and test (ivadomed)
+
+### Clone this repository
+In order to train this model, you will need the json configuration file located in this repo.
+```
+git clone https://github.com/axondeepseg/default-BF-model
+```
+
+### Get the data
+- git@data.neuro.polymtl.ca:datasets/data_axondeepseg_bf_training
+- commit f833b905c2cb221d45b2ef5ac2fad1100e70b410
+
+```
+git clone git@data.neuro.polymtl.ca:datasets/data_axondeepseg_bf_training
+cd dataset-used-to-train-the-model
+git annex get .
+```
+
+### Train this model
+To train the model, please first update the following fields in the training config file:
+- `fname_split`: full path to the split_dataset.joblib file
+- `path_data`: full path to training data
+- `gpu_ids`: specific to your hardware
+- `path_output`: where the model will be saved
+- `bids_config`: full path to the custom bids config located in `ivadomed/config/config_bids.json`
+
+Then, you can train the model with
+```
+ivadomed --train -c path_to_config_file.json
+```
+
+### Test this model
+To test the model, use
+```
+ivadomed --test -c path_to_config_file.json
+```
