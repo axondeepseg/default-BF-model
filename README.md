@@ -31,7 +31,7 @@ git clone https://github.com/axondeepseg/default-BF-model
 
 ```
 git clone git@data.neuro.polymtl.ca:datasets/data_axondeepseg_bf_training
-cd dataset-used-to-train-the-model
+cd data_axondeepseg_bf_training
 git annex get .
 ```
 
