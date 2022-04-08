@@ -2,7 +2,13 @@
 ---
 ## Model overview
 
-[//]: # (missing preview image; see https://github.com/axondeepseg/default-BF-model/issues/3)
+<figure>
+
+![bf model preview image](bf_model_preview.png)
+
+<figcaption align = "center"><b><i>Image courtesy of Gregory Borschel and Simeon Daeschler.</i></b></figcaption>
+
+</figure>
 
 Default Bright-Field (BF) optical microscopy model that works at a resolution of 0.1 micrometer per pixel.
 
