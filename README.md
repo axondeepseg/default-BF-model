@@ -23,7 +23,7 @@ git clone https://github.com/axondeepseg/default-BF-model
 ```
 
 ### Get the data
-The dataset used to train this model is hosted on git-annex at `data.neuro.polymtl.ca:datasets/data_axondeepseg_bf_training`. The specific dataset revision hash used for training is documented in the *version_info.log* file.
+The dataset used to train this model is hosted on git-annex at `data.neuro.polymtl.ca:datasets/data_axondeepseg_bf_training`. The dataset revision hash used for training is `f833b905c2cb221d45b2ef5ac2fad1100e70b410`.
 
 ### Train this model
 To train the model, please first update the following fields in the aforementioned JSON configuration file:
