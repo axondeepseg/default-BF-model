@@ -6,7 +6,7 @@
 
 ![bf model preview image](bf_model_preview.png)
 
-<figcaption align = "center"><b><i>Image courtesy of Gregory Borschel and Simeon Daeschler.</i></b></figcaption>
+<figcaption><p align="center"><b><i>Image courtesy of Gregory Borschel and Simeon Daeschler.</i></b></p></figcaption>
 
 </figure>
 
