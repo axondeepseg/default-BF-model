@@ -64,7 +64,7 @@ def save_json(data: Dict, file_path: str):
 def process_images(
     datapath: Path,
     out_folder: str,
-    particpant_to_sample_dict: Dict[str, List[str]],
+    participants_to_sample_dict: Dict[str, List[str]],
     bids_to_nnunet_dict: Dict[str, int],
     dataset_name: str,
     is_test: bool = False,
@@ -78,7 +78,7 @@ def process_images(
         Path to the data directory.
     out_folder : str
         Output directory to save processed images.
-    particpant_to_sample_dict : Dict[str, List[str]]
+    participants_to_sample_dict : Dict[str, List[str]]
         Dictionary mapping participant IDs to sample IDs.
     bids_to_nnunet_dict : Dict[str, int]
         Dictionary mapping subject names to case IDs.
@@ -90,8 +90,8 @@ def process_images(
     folder_type = "imagesTs" if is_test else "imagesTr"
     image_suffix = "_0000"
 
-    for subject in particpant_to_sample_dict.keys():
-        for image in particpant_to_sample_dict[subject]:
+    for subject in participants_to_sample_dict.keys():
+        for image in participants_to_sample_dict[subject]:
             case_id = bids_to_nnunet_dict[str((subject, image))]
             image_path = os.path.join(
                 datapath, subject, "micr", f"{subject}_{image}_SEM.png"
@@ -104,7 +104,7 @@ def process_images(
 def process_labels(
     datapath: Path,
     out_folder: str,
-    particpant_to_sample_dict: Dict[str, List[str]],
+    participants_to_sample_dict: Dict[str, List[str]],
     bids_to_nnunet_dict: Dict[str, int],
     dataset_name: str,
     label_type: Literal["axonmyelin", "myelin", "axon"] = "axonmyelin",
@@ -118,7 +118,7 @@ def process_labels(
         Path to the data directory.
     out_folder : str
         Output directory to save processed label images.
-    particpant_to_sample_dict : Dict[str, List[str]]
+    participants_to_sample_dict : Dict[str, List[str]]
         Dictionary mapping participant IDs to sample IDs.
     bids_to_nnunet_dict : Dict[str, int]
         Dictionary mapping subject names to case IDs.
@@ -128,8 +128,8 @@ def process_labels(
         Type of label to use. Options are 'axonmyelin', 'myelin', or 'axon'. Defaults to 'axonmyelin'.
     """
     label_type_to_divisor = {"axonmyelin": 127, "myelin": 255, "axon": 255}
-    for subject in particpant_to_sample_dict.keys():
-        for image in particpant_to_sample_dict[subject]:
+    for subject in participants_to_sample_dict.keys():
+        for image in participants_to_sample_dict[subject]:
             case_id = bids_to_nnunet_dict[str((subject, image))]
             label_path = os.path.join(
                 datapath,
@@ -190,15 +190,15 @@ def particpant_to_sample(file_path: Path) -> Dict[str, str]:
     with open(file_path, "r") as file:
         reader = csv.reader(file, delimiter="\t")
         next(reader)  # Skip the header row
-        particpant_to_sample_dict = {}
+        participants_to_sample_dict = {}
         for row in reader:
             participant_id = row[1]
             sample_id = row[0]
-            if participant_id in particpant_to_sample_dict:
-                particpant_to_sample_dict[participant_id].append(sample_id)
+            if participant_id in participants_to_sample_dict:
+                participants_to_sample_dict[participant_id].append(sample_id)
             else:
-                particpant_to_sample_dict[participant_id] = [sample_id]
-        return particpant_to_sample_dict
+                participants_to_sample_dict[participant_id] = [sample_id]
+        return participants_to_sample_dict
 
 
 def main(args):
