@@ -1,0 +1,14 @@
+{
+    "train": {
+        "sample-uoftRat04_acq-roi": "sub-uoftRat04",
+        "sample-uoftRat08_acq-roi": "sub-uoftRat08",
+        "sample-uoftRat09_acq-roi": "sub-uoftRat09",
+        "sample-uoftRat10_acq-roi": "sub-uoftRat10",
+        "sample-uoftRat16_acq-roi": "sub-uoftRat16",
+        "sample-uoftRat17_acq-roi": "sub-uoftRat17"
+    },
+    "test": {
+        "sample-uoftRat02_acq-roi": "sub-uoftRat02",
+        "sample-uoftRat07_acq-roi": "sub-uoftRat07"
+    }
+}
