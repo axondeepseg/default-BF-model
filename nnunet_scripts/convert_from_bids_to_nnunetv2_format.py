@@ -94,7 +94,7 @@ def process_images(
         for image in participants_to_sample_dict[subject]:
             case_id = bids_to_nnunet_dict[str((subject, image))]
             image_path = os.path.join(
-                datapath, subject, "micr", f"{subject}_{image}_SEM.png"
+                datapath, subject, "micr", f"{subject}_{image}_BF.png"
             )
             img = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
             fname = f"{dataset_name}_{case_id:03d}{image_suffix}.png"
@@ -137,7 +137,7 @@ def process_labels(
                 "labels",
                 subject,
                 "micr",
-                f"{subject}_{image}_SEM_seg-{label_type}-manual.png",
+                f"{subject}_{image}_BF_seg-{label_type}-manual.png",
             )
             label = np.round(
                 cv2.imread(str(label_path), cv2.IMREAD_GRAYSCALE)
@@ -171,34 +171,6 @@ def create_bids_to_nnunet_dict(file_path: Path) -> Dict[str, int]:
             bids_to_nnunet_dict[key] = num
             num += 1
         return bids_to_nnunet_dict
-
-
-def particpant_to_sample(file_path: Path) -> Dict[str, str]:
-    """
-    Creates a dictionary mapping participant IDs to sample IDs.
-
-    Parameters
-    ----------
-    file_path : Path
-        Path to the file containing the list of subjects.
-
-    Returns
-    -------
-    Dict[str, str]
-        Dictionary mapping participant IDs to sample IDs.
-    """
-    with open(file_path, "r") as file:
-        reader = csv.reader(file, delimiter="\t")
-        next(reader)  # Skip the header row
-        participants_to_sample_dict = {}
-        for row in reader:
-            participant_id = row[1]
-            sample_id = row[0]
-            if participant_id in participants_to_sample_dict:
-                participants_to_sample_dict[participant_id].append(sample_id)
-            else:
-                participants_to_sample_dict[participant_id] = [sample_id]
-        return participants_to_sample_dict
 
 
 def main(args):
@@ -312,13 +284,13 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--DATASETNAME",
-        default="SEM",
-        help="Name of the new dataset, defaults to SEM",
+        default="BF",
+        help="Name of the new dataset, defaults to BF",
     )
     parser.add_argument(
         "--DESCRIPTION",
-        default="SEM segmentation dataset for nnUNetv2",
-        help="Description of the new dataset, defaults to SEM segmentation dataset for nnUNetv2",
+        default="BF segmentation dataset for nnUNetv2",
+        help="Description of the new dataset, defaults to BF segmentation dataset for nnUNetv2",
     )
     parser.add_argument(
         "--SPLITJSON",
@@ -332,9 +304,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--DATASETID",
-        default=1,
+        default=3,
         type=int,
-        help="ID of the dataset. This ID is formatted with 3 digits. For example, 1 becomes '001', 23 becomes '023', etc. Defaults to 1",
+        help="ID of the dataset. This ID is formatted with 3 digits. For example, 1 becomes '001', 23 becomes '023', etc. Defaults to 3",
     )
     args = parser.parse_args()
     main(args)
