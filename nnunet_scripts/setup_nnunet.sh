@@ -10,9 +10,9 @@ config="2d"
 
 PATH_TO_ORIGINAL_DATASET=$1
 RESULTS_DIR=$(realpath $2)
-dataset_id=${3:-1}
+dataset_id=${3:-3}
 label_type=${4:-"axonmyelin"} # 'axonmyelin', 'myelin', or 'axon'. Defaults to 'axonmyelin'
-dataset_name=${5:-"SEM"}
+dataset_name=${5:-"BF_RAT"}
 
 echo "-------------------------------------------------------"
 echo "Converting dataset to nnUNetv2 format"
