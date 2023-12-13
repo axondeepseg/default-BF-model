@@ -1,0 +1,14 @@
+{
+    "train": {
+        "sample-uoftRat04": "sub-uoftRat04",
+        "sample-uoftRat08": "sub-uoftRat08",
+        "sample-uoftRat09": "sub-uoftRat09",
+        "sample-uoftRat10": "sub-uoftRat10",
+        "sample-uoftRat16": "sub-uoftRat16",
+        "sample-uoftRat17": "sub-uoftRat17"
+    },
+    "test": {
+        "sample-uoftRat02": "sub-uoftRat02",
+        "sample-uoftRat07": "sub-uoftRat07"
+    }
+}
